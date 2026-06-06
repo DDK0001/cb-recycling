@@ -20,7 +20,6 @@ server_scripts {
 
 dependencies {
     'ox_lib',
-    'community_bridge',
 }
 
 lua54 'yes'
