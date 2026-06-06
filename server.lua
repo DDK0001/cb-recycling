@@ -1,16 +1,10 @@
-Bridge = exports.community_bridge:Bridge()
 Recyclers = {}
-
-AddEventHandler('onResourceStart', function(resource)
-    if resource ~= GetCurrentResourceName() then return end
-    Bridge.Version.AdvancedVersionChecker("CoolBrad-Scripts/cb-patchnotes", resource)
-end)
 
 function RegisterRecycler()
     for k, v in pairs(Config.Recycler) do
         local stashName = v.stashName
         local stashWeight = 1000000
-        Bridge.Inventory.RegisterStash(stashName, stashName, 10, stashWeight, nil, nil, nil)
+        exports.ox_inventory:RegisterStash(stashName, stashName, 10, stashWeight, nil, nil, nil)
     end
 end
 
@@ -204,7 +198,7 @@ RegisterNetEvent('cb-recycling:server:OpenStash', function(stashName)
     for _, v in pairs(Config.Recycler) do
         if v.stashName == stashName and tooFarAwayFromSomething(src, v.coords) then return end
     end
-    Bridge.Inventory.OpenStash(src, "stash", stashName)
+    exports.ox_inventory:forceOpenInventory(src, "stash", stashName)
 end)
 
 RegisterNetEvent('cb-recycling:server:StartRecycling', function(stashName)
@@ -212,7 +206,7 @@ RegisterNetEvent('cb-recycling:server:StartRecycling', function(stashName)
     if src == nil then return end
     for k, v in pairs(Config.Recycler) do
         if v.stashName == stashName then
-            Bridge.Inventory.OpenStash(src, "stash", stashName)
+            exports.ox_inventory:forceOpenInventory(src, "stash", stashName)
             Scrapping(stashName, v.efficiency)
             Recyclers[stashName] = true
         end
