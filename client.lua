@@ -1,4 +1,3 @@
-Bridge = exports.community_bridge:Bridge()
 local recyclers = {}
 
 RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
@@ -47,7 +46,7 @@ RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
                 end
             }
         }
-        Bridge.Target.AddLocalEntity(prop, options)
+        exports.ox_target:addLocalEntity(prop, options)
     end
 end)
 
@@ -96,7 +95,7 @@ for k, v in pairs(Config.Recycler) do
             end
         }
     }
-    Bridge.Target.AddLocalEntity(prop, options)
+    exports.ox_target:addLocalEntity(prop, options)
 end
 
 RegisterNetEvent('cb-recycling:client:StopRecycling', function(stashName)
